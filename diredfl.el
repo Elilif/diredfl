@@ -236,6 +236,13 @@ In particular, inode number, number of hard links, and file size."
   :group 'diredfl)
 (defvar diredfl-write-priv 'diredfl-write-priv)
 
+(defface diredfl-user
+  '((((background dark)) (:foreground "Yellow"))
+    (t                   (:foreground "Black")))
+  "*Face used for write privilege indicator (w) in Dired buffers."
+  :group 'diredfl)
+(defvar diredfl-user 'diredfl-user)
+
 (defun diredfl-match-ignored-extensions (limit)
   "A matcher of ignored filename extensions for use in `font-lock-keywords'.
 LIMIT is the extent of the search."
@@ -258,6 +265,7 @@ LIMIT is the extent of the search."
 (defconst diredfl-font-lock-keywords-1
   (list
    '("^  \\(.+:\\)$" 1 diredfl-dir-heading) ; Directory headers
+   '("[0-9] \\(.*?\\) [0-9]" 1 diredfl-user)
    '("^  wildcard.*$" 0 'default) ; Override others, e.g. `l' for `diredfl-other-priv'.
    '("^  (No match).*$" 0 'default) ; Override others, e.g. `t' for `diredfl-other-priv'.
    '("[^ .]\\(\\.[^. /]+\\)$" 1 diredfl-file-suffix) ; Suffix, including `.'.
